@@ -52,10 +52,9 @@ async function conectarWhatsApp() {
             console.log('👉 Escanea el código QR de arriba o usa la imagen generada');
             console.log('==============================================\n');
             }
-            ```
-            ```javascript
-               const path = require('path');
-               app.use('/qr_image', express.static(path.join(__dirname, 'qr_code.png')));
+            
+            const path = require('path');
+            app.use('/qr_image', express.static(path.join(__dirname, 'qr_code.png')));
                      ```
         }
         
