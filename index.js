@@ -2,7 +2,8 @@ const { default: makeWASocket, DisconnectReason, useMultiFileAuthState } = requi
 const P = require('pino');
 const fs = require('fs');
 const express = require('express');
-const qrcode = require('qrcode'); // al inicio del archivo
+const qrcode = require('qrcode-terminal')
+const QRCode = require('qrcode'); // al inicio del archivo
 
 // Servidor Express para mantener activo en Render
 const app = express();
