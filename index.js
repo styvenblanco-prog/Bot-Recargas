@@ -2,7 +2,7 @@ const { default: makeWASocket, DisconnectReason, useMultiFileAuthState } = requi
 const P = require('pino');
 const fs = require('fs');
 const express = require('express');
-const qrcode = require('qrcode-terminal');
+const QRCode = require('qrcode'); // al inicio del archivo
 
 // Servidor Express para mantener activo en Render
 const app = express();
@@ -34,13 +34,29 @@ async function conectarWhatsApp() {
             console.log('\n==============================================');
             console.log('📱 ¡ESCANEA ESTE CÓDIGO QR CON WHATSAPP BUSINESS!');
             console.log('==============================================\n');
+                                 
+             // Mostrar en terminal (caracteres)
             qrcode.generate(qr, { small: true });
+                                                      
+             // Guardar como imagen PNG
+            const qrPath = './qr_code.png';
+            QRCode.toFile(qrPath, qr, { type: 'png' }, (err) => {
+            if (err) console.error('Error al guardar QR:', err);
+            else console.log(`📸 QR guardado como imagen: ${qrPath}`);
+            });
+                                                                                                           
             console.log('\n==============================================');
             console.log('👆 Abre WhatsApp Business en tu celular');
             console.log('👉 Ve a: Menú (⋮) → Dispositivos vinculados');
             console.log('👉 Toca: Vincular un dispositivo');
-            console.log('👉 Escanea el código QR de arriba');
+            console.log('👉 Escanea el código QR de arriba o usa la imagen generada');
             console.log('==============================================\n');
+            }
+            ```
+            ```javascript
+               const path = require('path');
+               app.use('/qr_image', express.static(path.join(__dirname, 'qr_code.png')));
+                     ```
         }
         
         if(connection === 'close') {
