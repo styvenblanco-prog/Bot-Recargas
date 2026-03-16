@@ -2,7 +2,6 @@ const { default: makeWASocket, DisconnectReason, useMultiFileAuthState } = requi
 const P = require('pino');
 const fs = require('fs');
 const express = require('express');
-const qrcode = require('qrcode-terminal')
 const QRCode = require('qrcode'); // al inicio del archivo
 
 // Servidor Express para mantener activo en Render
@@ -42,9 +41,9 @@ async function conectarWhatsApp() {
              // Guardar como imagen PNG
             const qrPath = './qr_code.png';
             QRCode.toFile(qrPath, qr, { type: 'png' }, (err) => {
-            if (err) console.error('Error al guardar QR:', err);
-            else console.log(`📸 QR guardado como imagen: ${qrPath}`);
-            });
+             if (err) console.error('Error al guardar QR:', err);
+             else console.log(`📸 QR guardado como imagen: ${qrPath}`);
+             });
                                                                                                            
             console.log('\n==============================================');
             console.log('👆 Abre WhatsApp Business en tu celular');
@@ -55,9 +54,7 @@ async function conectarWhatsApp() {
             }
             
             const path = require('path');
-            app.use('/qr_image', express.static(path.join(__dirname, 'qr_code.png')));
-                     ```
-        }
+             app.use('/qr_image', express.static(path.join(__dirname, 'qr_code.png')))
         
         if(connection === 'close') {
             const shouldReconnect = (lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut);
